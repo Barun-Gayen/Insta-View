@@ -1,0 +1,105 @@
+<%- include("includes/head.ejs") %>
+
+<body>
+
+<div class="container">
+
+    <!-- Profile -->
+    <div class="profile-card">
+
+        <div class="profile-left">
+            <img src="<%= data.profileImage %>"
+                 class="profile-img"
+                 alt="<%= data.username %>">
+        </div>
+
+        <div class="profile-right">
+
+            <h1>
+                @<%= data.username %>
+
+                <% if(data.verified){ %>
+                    <span class="verified">✔️</span>
+                <% } %>
+            </h1>
+
+            <h3><%= data.name %></h3>
+
+            <p class="bio">
+                <%= data.bio %>
+            </p>
+
+            <div class="buttons">
+                <button class="follow">Follow</button>
+                <button class="message">Message</button>
+            </div>
+
+            <div class="stats">
+                <span>
+                    <strong><%= data.postsCount %></strong><br>
+                    Posts
+                </span>
+
+                <span>
+                    <strong><%= data.followers.toLocaleString() %></strong><br>
+                    Followers
+                </span>
+
+                <span>
+                    <strong><%= data.following.toLocaleString() %></strong><br>
+                    Following
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Posts -->
+
+    <div class="posts">
+
+        <% data.posts.forEach(post => { %>
+
+            <div class="post">
+
+                <img src="<%= post.image %>" alt="">
+
+                <div class="post-info">
+
+                    <h3><%= post.location %></h3>
+
+                    <p>
+                        <%= post.caption %>
+                    </p>
+
+                    <div class="post-stats">
+
+                        <span>❤️ <%= post.likes.toLocaleString() %></span>
+
+                        <span>💬 <%= post.comments.toLocaleString() %></span>
+
+                    </div>
+
+                    <small>
+                        📅 <%= post.date %>
+                    </small>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+<%- include("includes/footer.ejs") %>
+
+<script src="/app.js"></script>
+
+</body>
+</html>
